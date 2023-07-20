@@ -35,6 +35,7 @@ namespace MTT_Manager
         public static FirebaseClient client;
         public static UserCredential currentUser;
         public static FirebaseStorage storageRef;
+        public static string currentID;
 
         public static void InitializeFirebase()
         {

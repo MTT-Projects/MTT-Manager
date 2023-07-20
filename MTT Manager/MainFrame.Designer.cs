@@ -39,6 +39,7 @@
             this.imprimirReporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataView = new System.Windows.Forms.DataGridView();
             this.mySplitContainer = new System.Windows.Forms.SplitContainer();
+            this.BT_edit = new System.Windows.Forms.Button();
             this.BT_admin = new System.Windows.Forms.Button();
             this.Pic_AccountState = new System.Windows.Forms.PictureBox();
             this.BT_revealPW = new System.Windows.Forms.Button();
@@ -129,6 +130,7 @@
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
             this.editarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.editarToolStripMenuItem.Text = "Editar";
+            this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
             // imprimirReporteToolStripMenuItem
             // 
@@ -168,6 +170,7 @@
             // 
             // mySplitContainer.Panel1
             // 
+            this.mySplitContainer.Panel1.Controls.Add(this.BT_edit);
             this.mySplitContainer.Panel1.Controls.Add(this.BT_admin);
             this.mySplitContainer.Panel1.Controls.Add(this.Pic_AccountState);
             this.mySplitContainer.Panel1.Controls.Add(this.BT_revealPW);
@@ -200,6 +203,16 @@
             this.mySplitContainer.SplitterDistance = 230;
             this.mySplitContainer.SplitterWidth = 1;
             this.mySplitContainer.TabIndex = 3;
+            // 
+            // BT_edit
+            // 
+            this.BT_edit.Location = new System.Drawing.Point(3, 398);
+            this.BT_edit.Name = "BT_edit";
+            this.BT_edit.Size = new System.Drawing.Size(222, 23);
+            this.BT_edit.TabIndex = 25;
+            this.BT_edit.Text = "Edit";
+            this.BT_edit.UseVisualStyleBackColor = true;
+            this.BT_edit.Click += new System.EventHandler(this.BT_edit_Click);
             // 
             // BT_admin
             // 
@@ -255,6 +268,7 @@
             this.BT_DeleteUser.TabIndex = 22;
             this.toolTip.SetToolTip(this.BT_DeleteUser, "Delete User");
             this.BT_DeleteUser.UseVisualStyleBackColor = false;
+            this.BT_DeleteUser.Click += new System.EventHandler(this.BT_DeleteUser_Click);
             // 
             // BT_Ban
             // 
@@ -403,7 +417,7 @@
             this.GamePanel.Controls.Add(this.Game_HighScore_date);
             this.GamePanel.Location = new System.Drawing.Point(3, 331);
             this.GamePanel.Name = "GamePanel";
-            this.GamePanel.Size = new System.Drawing.Size(222, 90);
+            this.GamePanel.Size = new System.Drawing.Size(222, 66);
             this.GamePanel.TabIndex = 3;
             // 
             // gameLastScoreLabel
@@ -445,6 +459,7 @@
             // userNickName
             // 
             this.userNickName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.userNickName.ForeColor = System.Drawing.Color.Black;
             this.userNickName.Location = new System.Drawing.Point(2, 132);
             this.userNickName.Name = "userNickName";
             this.userNickName.Size = new System.Drawing.Size(222, 23);
@@ -487,7 +502,7 @@
             this.BT_refresh.BackgroundImage = global::MTT_Manager.Properties.Resources.refresh_icon;
             this.BT_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_refresh.Location = new System.Drawing.Point(16, 3);
+            this.BT_refresh.Location = new System.Drawing.Point(19, 3);
             this.BT_refresh.Name = "BT_refresh";
             this.BT_refresh.Size = new System.Drawing.Size(23, 23);
             this.BT_refresh.TabIndex = 3;
@@ -527,8 +542,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox userPicture;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem sesiónToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem menu_sesion_logout;
@@ -566,5 +579,7 @@
         private System.Windows.Forms.ToolStripMenuItem nuevoUsuarioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem imprimirReporteToolStripMenuItem;
         private System.Windows.Forms.Button BT_admin;
+        private System.Windows.Forms.Button BT_edit;
+        public System.Windows.Forms.PictureBox userPicture;
     }
 }

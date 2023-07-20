@@ -53,7 +53,9 @@ namespace MTT_Manager
                 {
                     MessageBox.Show($"Bienvenido {nickName}.", "Inicio exitoso");
                     FireBaseControl.currentUser = authLink;
+                    FireBaseControl.currentID = userId;
                     currentPass = password;
+                    
                     return true;
                 }
                 else
@@ -247,6 +249,21 @@ namespace MTT_Manager
         }
 
         private void BT_revealPW_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoginFrame_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void passInput_TextChanged(object sender, EventArgs e)
         {
 
         }

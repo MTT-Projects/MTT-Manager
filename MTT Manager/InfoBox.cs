@@ -129,7 +129,6 @@ namespace MTT_Manager
             return form;
         }
 
-
         private static Image GetIconImage(MessageBoxIcon icon)
         {
             switch (icon)

@@ -82,6 +82,7 @@
             this.passInput.Size = new System.Drawing.Size(236, 20);
             this.passInput.TabIndex = 1;
             this.passInput.Click += new System.EventHandler(this.passInput_Click);
+            this.passInput.TextChanged += new System.EventHandler(this.passInput_TextChanged);
             this.passInput.Enter += new System.EventHandler(this.passInput_Click);
             this.passInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.emailInput_KeyDown);
             this.passInput.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox_KeyPress);
@@ -94,6 +95,7 @@
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Contraseña";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -148,6 +150,7 @@
             this.Name = "LoginFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingreso";
+            this.Load += new System.EventHandler(this.LoginFrame_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

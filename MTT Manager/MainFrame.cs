@@ -1,4 +1,5 @@
 ﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
 using Firebase.Database;
 using Firebase.Database.Offline;
 using Firebase.Database.Query;
@@ -14,10 +15,12 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 
 namespace MTT_Manager
@@ -26,7 +29,7 @@ namespace MTT_Manager
     {
         private List<User> userList;
 
-        private Dictionary<string, GameData> tempGamesList;
+        public Dictionary<string, GameData> tempGamesList;
 
         private string currentUserID;
 
@@ -45,64 +48,7 @@ namespace MTT_Manager
             await LoadDataFromFirebaseDatabase(dataView);
         }
 
-        public async Task UploadProfilePicture(string userID)
-        {
-            var openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "Archivos de imagen|*.jpg;*.jpeg;*.png";
-            openFileDialog.Title = "Seleccionar imagen";
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                var loadMessage = InfoBox.ShowMessage(this,"Subiendo archivo al Almacenamiento", "Subiendo archivo", MessageBoxIcon.Information);
-                var imagePath = openFileDialog.FileName;
-                var resizedImage = ResizeImage(imagePath, 250);
-
-                // Obtener el IsAdmin del usuario correspondiente a la uid del auth
-
-                var imageRef = FireBaseControl.storageRef
-                    .Child("ProfilePics")
-                    .Child($"{userID}.png");
-
-                var task = imageRef.PutAsync(resizedImage);
-
-                task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progreso: {e.Percentage} %");
-
-                await task;
-                loadMessage.Dispose();
-            }
-        }
-
-
-        private static Stream ResizeImage(string imagePath, int maxWidth)
-        {
-            using (var image = Image.FromFile(imagePath))
-            {
-                int newWidth, newHeight;
-                if (image.Width > maxWidth)
-                {
-                    newWidth = maxWidth;
-                    newHeight = (int)(image.Height * ((float)maxWidth / image.Width));
-                }
-                else
-                {
-                    newWidth = image.Width;
-                    newHeight = image.Height;
-                }
-
-                var resizedImage = new Bitmap(newWidth, newHeight);
-                using (var graphics = Graphics.FromImage(resizedImage))
-                {
-                    graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                    graphics.DrawImage(image, 0, 0, newWidth, newHeight);
-                }
-
-                var memoryStream = new MemoryStream();
-                resizedImage.Save(memoryStream, ImageFormat.Png);
-                memoryStream.Position = 0;
-
-                return memoryStream;
-            }
-        }
 
 
 
@@ -181,6 +127,7 @@ namespace MTT_Manager
 
         void ClearUserView()
         {
+            userPicture.Image = Resources.MTT_Logo_;
             currentUserID = "";
             currentUser = null;
             userNickName.Text = "";
@@ -211,7 +158,7 @@ namespace MTT_Manager
             GamesListBox.DataSource = null;
         }
 
-        async void SetUserView(string userID)
+        public async void SetUserView(string userID)
         {
             ClearUserView();
             var loadMessage = InfoBox.ShowMessage(this,$"Cargando datos del usuario:\n{userID}.\nPor favor espere", "Cargando", MessageBoxIcon.Information);
@@ -235,6 +182,7 @@ namespace MTT_Manager
                     mySplitContainer.Panel1.Enabled = true;
 
                     userNickName.Text = myUser.NickName;
+                    userNickName.ForeColor = myUser.IsBanned ? Color.Red : Color.Black;
                     userIDLabel.Text = userID;
                     EmailLabel.Text = myUser.Email;
                     PasswordLabel.Text = string.Join("", Enumerable.Repeat("*", myUser.Password.Count()));
@@ -310,12 +258,9 @@ namespace MTT_Manager
                 SetUserView(userList[row].UserId);
         }
 
-        private async void userPicture_DoubleClick(object sender, EventArgs e)
+        private void userPicture_DoubleClick(object sender, EventArgs e)
         {
-            if (currentUserID != "")
-            {
-                await UploadProfilePicture(currentUserID);
-            }
+
         }
 
         private void dataView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -410,6 +355,7 @@ namespace MTT_Manager
                     currentUser.IsBanned = false;
                 }
                 BT_Ban.BackgroundImage = new Bitmap(currentUser.IsBanned ? Resources.Banned_icon : Resources.Ban_icon, 35, 35);
+                userNickName.ForeColor = currentUser.IsBanned ? Color.Red : Color.Black;
             }
             else
             {
@@ -501,5 +447,82 @@ namespace MTT_Manager
         {
             PdfGenerator.PrintUsersData(userList);
         }
+
+        private void BT_edit_Click(object sender, EventArgs e)
+        {
+            SetEditor();
+        }
+        private void editarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentUser != null)
+                SetEditor();
+        }
+
+        public void SetEditor()
+        {
+            UserEditor newEditor = new UserEditor(this, currentUser);
+            newEditor.Show();
+        }
+
+        private async void BT_DeleteUser_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("¿Está seguro de borrar a este usuario?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                ConfirmWithPassword passConfirm = new ConfirmWithPassword(this);
+                bool secondResult = await passConfirm.GetResponse();
+                if(secondResult)
+                {
+                    DeleteUser(currentUserID);
+                }
+                else
+                {
+
+                }
+
+            }
+        }
+
+        public async void DeleteUser(string userID)
+        {
+            var deleteMsg = InfoBox.ShowMessage($"Eliminando datos del jugador\n{userID}.\nPorfavor espere.", "Eliminando datos.", MessageBoxIcon.Exclamation);
+
+            FirebaseAuthConfig myConfig = new FirebaseAuthConfig
+            {
+                ApiKey = "AIzaSyAkzjBpqOcrwwFVhMVugseHFaYWVkGbFgY",
+                AuthDomain = "catgamesucre.firebaseapp.com",
+            };
+            myConfig.Providers = new FirebaseAuthProvider[]
+            {
+                new EmailProvider()
+            };
+
+            FirebaseAuthClient myAuth = new FirebaseAuthClient(myConfig);
+
+            UserCredential myCredential = await myAuth.SignInWithEmailAndPasswordAsync(currentUser.Email, currentUser.Password);
+            await myAuth.User.DeleteAsync();
+
+
+            if (currentUser.PlayedGames != null)
+            {
+                foreach (var data in currentUser.PlayedGames)
+                {
+                    var GameDataRef = FireBaseControl.client.Child("scores").Child(data.Key).Child(currentUser.UserId);
+                    await GameDataRef.DeleteAsync();
+                }
+            }
+
+            var UserDataRef = FireBaseControl.client.Child("users").Child(currentUser.UserId);
+            await UserDataRef.DeleteAsync();
+            deleteMsg.Close();
+        }
+
+        public void RegisterNewUser(string nick,string email, string pass)
+        {
+
+        }
+
+        
     }
 }

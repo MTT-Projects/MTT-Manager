@@ -1,4 +1,5 @@
 ﻿using Firebase.Auth;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,6 +13,7 @@ namespace MTT_Manager
 {
     public class User
     {
+        [JsonIgnore]
         public string UserId { get; set; }
         public string NickName { get; set; }
         [Browsable(false)]
@@ -41,7 +43,9 @@ namespace MTT_Manager
 
     public class GameData
     {
+        [JsonIgnore]
         public int position { get; set; }
+        [JsonIgnore]
         public string userID { get; set; }
         public string NickName { get; set; }
         public int HighScore { get; set; }
