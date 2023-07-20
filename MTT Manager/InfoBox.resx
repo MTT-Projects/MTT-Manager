@@ -117,47 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="refresh-icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\refresh-icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye-close_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\eye-close_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="trashIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\trashIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="LoadIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\LoadIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="CatGame_Key" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CatGame_Key.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="Ban_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Ban_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="defaultPic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\defaultPic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye-open_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\eye-open_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="MTT_Logo " type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MTT_Logo .png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Banned_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Banned_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Unadmin_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Unadmin_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="admin_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\admin_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="NoVerified_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\NoVerified_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Verifed_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Verifed_icon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
 </root>

@@ -115,6 +115,7 @@
             this.BT_revealPW.TabIndex = 0;
             this.BT_revealPW.TabStop = false;
             this.BT_revealPW.UseVisualStyleBackColor = true;
+            this.BT_revealPW.Click += new System.EventHandler(this.BT_revealPW_Click);
             this.BT_revealPW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BT_revealPW_MouseDown);
             this.BT_revealPW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BT_revealPW_MouseUp);
             // 
@@ -141,7 +142,9 @@
             this.Controls.Add(this.emailInput);
             this.Controls.Add(this.BT_Close);
             this.Controls.Add(this.BT_login);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "LoginFrame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ingreso";

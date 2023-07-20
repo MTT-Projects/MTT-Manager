@@ -1,5 +1,8 @@
-﻿using FireSharp.Interfaces;
+﻿using Firebase.Auth;
+using Firebase.Auth.Providers;
+using Firebase.Database;
 using FireSharp.Config;
+using FireSharp.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,13 +12,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FireSharp;
-using Firebase.Auth;
-using FireSharp.Response;
-using System.Security.Cryptography;
-using Firebase.Auth.Providers;
 using MTT_Manager.Properties;
-
+using Firebase.Database.Query;
+using FireSharp.Extensions;
+using Newtonsoft.Json;
 namespace MTT_Manager
 {
     public partial class LoginFrame : Form
@@ -23,26 +23,27 @@ namespace MTT_Manager
 
         public LoginFrame()
         {
-            instance = this; 
+            instance = this;
             InitializeComponent();
             FireBaseControl.InitializeFirebase();
         }
 
         public static LoginFrame instance;
-
+        public static string currentPass;
 
 
         private async Task<bool> SignInWithEmail(string email, string password)
         {
-            var loadMessage = InfoBox.ShowMessage("Verificando datos de sesión\nPorfavor espere", "Verificando", MessageBoxIcon.Information);
+            var loadMessage = InfoBox.ShowMessage("Verificando datos de sesión\nPor favor espere", "Verificando", MessageBoxIcon.Information);
 
             try
             {
                 UserCredential authLink = await FireBaseControl.auth.SignInWithEmailAndPasswordAsync(email, password);
                 string userId = authLink.User.Uid;
 
+                await FireBaseControl.SetAuth(email, password);
+
                 // Verificar si el usuario es un administrador en la base de datos
-                
                 bool isAdmin = await CheckAdminStatus(userId);
                 string nickName = await GetNickName(userId);
 
@@ -50,13 +51,13 @@ namespace MTT_Manager
 
                 if (isAdmin)
                 {
-                    MessageBox.Show($"Bienvenido {nickName}.", "Inicio existoso");
+                    MessageBox.Show($"Bienvenido {nickName}.", "Inicio exitoso");
                     FireBaseControl.currentUser = authLink;
-                    return true;                    
+                    currentPass = password;
+                    return true;
                 }
                 else
                 {
-
                     MessageBox.Show("No tienes permisos de administrador.", "Acceso denegado", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     ResetFrame();
                     return false;
@@ -71,16 +72,7 @@ namespace MTT_Manager
             }
         }
 
-        public void ResetFrame()
-        {
-            this.Enabled = true;
-            this.Focus();
-            emailInput.Text = "";
-            passInput.Text = "";
-            emailInput.Focus();
-        }
-
-    public static string GetExceptionDesc(FirebaseAuthException ex)
+        public static string GetExceptionDesc(FirebaseAuthException ex)
         {
             string description = string.Empty;
 
@@ -170,20 +162,33 @@ namespace MTT_Manager
             }
             return description;
         }
-
-
+        public void ResetFrame()
+        {
+            this.Enabled = true;
+            this.Focus();
+            emailInput.Text = "";
+            passInput.Text = "";
+            emailInput.Focus();
+        }
 
         private async Task<bool> CheckAdminStatus(string userId)
         {
-            FirebaseResponse response = await FireBaseControl.client.GetAsync($"users/{userId}/isAdmin");
-            bool isAdmin = response.ResultAs<bool>();
-            return isAdmin;
+            
+            User checkDataPlayer = await FireBaseControl.client
+                .Child("users")
+                .Child(userId)
+                .OnceSingleAsync<User>();
+
+            //MessageBox.Show(JsonConvert.SerializeObject(checkDataPlayer));
+            
+            return checkDataPlayer.IsAdmin;
         }
 
         private async Task<string> GetNickName(string userId)
         {
-            FirebaseResponse response = await FireBaseControl.client.GetAsync($"users/{userId}/NickName");
-            string nickName= response.ResultAs<string>();
+            var nickNameRef = FireBaseControl.client.Child("users").Child(userId).Child("NickName");
+            var nickNameSnapshot = await nickNameRef.OnceSingleAsync<string>();
+            string nickName = nickNameSnapshot ?? string.Empty;
             return nickName;
         }
 
@@ -204,7 +209,7 @@ namespace MTT_Manager
             string password = passInput.Text;
 
             bool isLogin = await SignInWithEmail(emailOrNickname, password);
-            //loadMessage.Dispose();
+
             if (isLogin)
             {
                 MainFrame mainApp = new MainFrame();
@@ -240,7 +245,10 @@ namespace MTT_Manager
             if (e.KeyValue == 13)
                 LoginEvent();
         }
+
+        private void BT_revealPW_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-
-
 }

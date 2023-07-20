@@ -73,6 +73,62 @@ namespace MTT_Manager
             return form;
         }
 
+        public static InfoBox ShowMessage(Form mainForm, string message = "Default Message", string title = "Default", MessageBoxIcon icon = MessageBoxIcon.None)
+        {
+            mainForm.Enabled = false; // Deshabilitar el formulario principal
+
+            var form = new InfoBox
+            {
+                FormBorderStyle = FormBorderStyle.FixedDialog,
+                MaximizeBox = false,
+                MinimizeBox = false,
+                StartPosition = FormStartPosition.CenterScreen,
+                Text = title,
+                AutoSize = true
+            };
+
+            var panel = new TableLayoutPanel
+            {
+                AutoSize = true,
+                Dock = DockStyle.Fill,
+                Padding = new Padding(20)
+            };
+
+            var iconPictureBox = new PictureBox
+            {
+                SizeMode = PictureBoxSizeMode.AutoSize,
+                Image = GetIconImage(icon),
+                Margin = new Padding(0, 0, 20, 0)
+            };
+
+            var messageLabel = new Label
+            {
+                Text = message,
+                AutoSize = true,
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            panel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            panel.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            panel.Controls.Add(iconPictureBox, 0, 0);
+            panel.Controls.Add(messageLabel, 1, 0);
+
+            form.Controls.Add(panel);
+
+            form.FormClosing += (sender, e) =>
+            {
+                mainForm.Enabled = true; // Habilitar el formulario principal cuando se cierre el cuadro de mensaje
+                mainForm.Focus();
+            };
+
+            form.UpdateBounds();
+            form.Show();
+
+            return form;
+        }
+
 
         private static Image GetIconImage(MessageBoxIcon icon)
         {
