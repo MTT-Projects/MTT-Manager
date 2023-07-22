@@ -68,102 +68,13 @@ namespace MTT_Manager
             catch (FirebaseAuthException ex)
             {
                 loadMessage.Dispose();
-                MessageBox.Show(GetExceptionDesc(ex), "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(FireBaseControl.GetExceptionDesc(ex), "Error de inicio de sesión", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ResetFrame();
                 return false;
             }
         }
 
-        public static string GetExceptionDesc(FirebaseAuthException ex)
-        {
-            string description = string.Empty;
-
-            switch (ex.Reason)
-            {
-                case AuthErrorReason.Undefined:
-                    description = "La solicitud no se completó, posiblemente debido a un problema de red.";
-                    break;
-                case AuthErrorReason.Unknown:
-                    description = "Error desconocido.";
-                    break;
-                case AuthErrorReason.OperationNotAllowed:
-                    description = "El método de inicio de sesión no está permitido.";
-                    break;
-                case AuthErrorReason.UserDisabled:
-                    description = "El usuario está desactivado y no tiene acceso.";
-                    break;
-                case AuthErrorReason.UserNotFound:
-                    description = "No se encontró un usuario.";
-                    break;
-                case AuthErrorReason.InvalidProviderID:
-                    description = "El cuerpo de la solicitud no contiene o contiene un proveedor de autenticación no válido.";
-                    break;
-                case AuthErrorReason.InvalidAccessToken:
-                    description = "El cuerpo de la solicitud no contiene o contiene un token de acceso no válido obtenido del proveedor de autenticación.";
-                    break;
-                case AuthErrorReason.LoginCredentialsTooOld:
-                    description = "Se han realizado cambios en la cuenta del usuario desde el último inicio de sesión. \nEl usuario necesita iniciar sesión nuevamente.";
-                    break;
-                case AuthErrorReason.MissingRequestURI:
-                    description = "La solicitud no contiene un valor para el parámetro: requestUri.";
-                    break;
-                case AuthErrorReason.SystemError:
-                    description = "La solicitud no contiene un valor para el parámetro: postBody.";
-                    break;
-                case AuthErrorReason.InvalidEmailAddress:
-                    description = "La dirección de correo electrónico no es válida.";
-                    break;
-                case AuthErrorReason.MissingPassword:
-                    description = "¡No se proporcionó una contraseña!";
-                    break;
-                case AuthErrorReason.WeakPassword:
-                    description = "La contraseña debe tener más de 6 caracteres.";
-                    break;
-                case AuthErrorReason.EmailExists:
-                    description = "La dirección de correo electrónico ya está vinculada a otra cuenta.";
-                    break;
-                case AuthErrorReason.MissingEmail:
-                    description = "¡No se proporcionó un correo electrónico!";
-                    break;
-                case AuthErrorReason.UnknownEmailAddress:
-                    description = "No hay ningún usuario registrado con la dirección de correo electrónico proporcionada.";
-                    break;
-                case AuthErrorReason.WrongPassword:
-                    description = "La contraseña proporcionada no es válida para la dirección de correo electrónico.";
-                    break;
-                case AuthErrorReason.TooManyAttemptsTryLater:
-                    description = "Se han intentado demasiados inicios de sesión con contraseña. \nInténtalo de nuevo más tarde.";
-                    break;
-                case AuthErrorReason.MissingRequestType:
-                    description = "La solicitud no contiene un valor para el parámetro: \nrequestType o el valor proporcionado es inválido.";
-                    break;
-                case AuthErrorReason.ResetPasswordExceedLimit:
-                    description = "Se ha excedido el límite de restablecimiento de contraseña.";
-                    break;
-                case AuthErrorReason.InvalidIDToken:
-                    description = "¡El token de ID de usuario autenticado no es válido!";
-                    break;
-                case AuthErrorReason.MissingIdentifier:
-                    description = "La solicitud no contiene un valor para el parámetro: identifier.";
-                    break;
-                case AuthErrorReason.InvalidIdentifier:
-                    description = "La solicitud contiene un valor no válido para el parámetro: identifier.";
-                    break;
-                case AuthErrorReason.AlreadyLinked:
-                    description = "La cuenta que se intenta vincular ya está vinculada.";
-                    break;
-                case AuthErrorReason.InvalidApiKey:
-                    description = "La clave de API especificada no es válida.";
-                    break;
-                case AuthErrorReason.AccountExistsWithDifferentCredential:
-                    description = "El correo electrónico con el que el usuario intentó iniciar sesión ya está registrado en otro proveedor.";
-                    break;
-                default:
-                    description = "Se ha producido un error en la autenticación:\n" + ex.Message;
-                    break;
-            }
-            return description;
-        }
+        
         public void ResetFrame()
         {
             this.Enabled = true;

@@ -518,7 +518,7 @@ namespace MTT_Manager
             deleteMsg.Close();
         }
 
-        public void RegisterNewUser(string nick,string email, string pass)
+        public void RegisterNewUser()
         {
 
         }

@@ -63,7 +63,7 @@ namespace MTT_Manager
                     TB_NickName.Text = myUser.NickName;
                     userID_Label.Text = myUser.UserId;
                     TB_email.Text = myUser.Email;
-                    TB_Pass.Text = string.Join("", Enumerable.Repeat("*", myUser.Password.Count()));
+                    TB_Pass.Text = myUser.Password;
 
                     RegistrationDate.Value = myUser.RegistrationDate;
                     LastLoginDate.Value = myUser.LastLogin == DateTime.MinValue

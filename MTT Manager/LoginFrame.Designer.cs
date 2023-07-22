@@ -42,6 +42,7 @@
             // 
             // BT_login
             // 
+            this.BT_login.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BT_login.Location = new System.Drawing.Point(12, 166);
             this.BT_login.Name = "BT_login";
             this.BT_login.Size = new System.Drawing.Size(150, 45);
@@ -52,6 +53,7 @@
             // 
             // BT_Close
             // 
+            this.BT_Close.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BT_Close.Location = new System.Drawing.Point(221, 164);
             this.BT_Close.Name = "BT_Close";
             this.BT_Close.Size = new System.Drawing.Size(150, 45);

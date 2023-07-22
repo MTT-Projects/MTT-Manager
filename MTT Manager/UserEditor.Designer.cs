@@ -46,8 +46,6 @@
             this.HighscoreLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.GamesListBox = new System.Windows.Forms.ComboBox();
-            this.userPicture = new System.Windows.Forms.PictureBox();
-            this.BT_revealPW = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.TB_Pass = new System.Windows.Forms.TextBox();
             this.isAdmin_check = new System.Windows.Forms.CheckBox();
@@ -61,6 +59,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.LastBanDate = new System.Windows.Forms.DateTimePicker();
             this.userID_Label = new System.Windows.Forms.Label();
+            this.BT_revealPW = new System.Windows.Forms.Button();
+            this.userPicture = new System.Windows.Forms.PictureBox();
             this.ScoresPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LastScore_Value)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.HighScore_value)).BeginInit();
@@ -69,6 +69,7 @@
             // 
             // ChangePicture
             // 
+            this.ChangePicture.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.ChangePicture.Location = new System.Drawing.Point(12, 171);
             this.ChangePicture.Name = "ChangePicture";
             this.ChangePicture.Size = new System.Drawing.Size(125, 23);
@@ -235,31 +236,6 @@
             this.GamesListBox.TabIndex = 7;
             this.GamesListBox.SelectedIndexChanged += new System.EventHandler(this.GamesListBox_SelectedIndexChanged);
             // 
-            // userPicture
-            // 
-            this.userPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.userPicture.Image = global::MTT_Manager.Properties.Resources.MTT_Logo_;
-            this.userPicture.Location = new System.Drawing.Point(12, 40);
-            this.userPicture.Name = "userPicture";
-            this.userPicture.Size = new System.Drawing.Size(125, 125);
-            this.userPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.userPicture.TabIndex = 0;
-            this.userPicture.TabStop = false;
-            // 
-            // BT_revealPW
-            // 
-            this.BT_revealPW.BackgroundImage = global::MTT_Manager.Properties.Resources.eye_close_1;
-            this.BT_revealPW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.BT_revealPW.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BT_revealPW.Location = new System.Drawing.Point(377, 134);
-            this.BT_revealPW.Name = "BT_revealPW";
-            this.BT_revealPW.Size = new System.Drawing.Size(42, 20);
-            this.BT_revealPW.TabIndex = 8;
-            this.BT_revealPW.TabStop = false;
-            this.BT_revealPW.UseVisualStyleBackColor = true;
-            this.BT_revealPW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BT_revealPW_MouseDown);
-            this.BT_revealPW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BT_revealPW_MouseUp);
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -388,6 +364,31 @@
             this.userID_Label.TabIndex = 23;
             this.userID_Label.Text = "label12";
             this.userID_Label.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // BT_revealPW
+            // 
+            this.BT_revealPW.BackgroundImage = global::MTT_Manager.Properties.Resources.eye_close_1;
+            this.BT_revealPW.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BT_revealPW.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BT_revealPW.Location = new System.Drawing.Point(377, 134);
+            this.BT_revealPW.Name = "BT_revealPW";
+            this.BT_revealPW.Size = new System.Drawing.Size(42, 20);
+            this.BT_revealPW.TabIndex = 8;
+            this.BT_revealPW.TabStop = false;
+            this.BT_revealPW.UseVisualStyleBackColor = true;
+            this.BT_revealPW.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BT_revealPW_MouseDown);
+            this.BT_revealPW.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BT_revealPW_MouseUp);
+            // 
+            // userPicture
+            // 
+            this.userPicture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.userPicture.Image = global::MTT_Manager.Properties.Resources.MTT_Logo_;
+            this.userPicture.Location = new System.Drawing.Point(12, 40);
+            this.userPicture.Name = "userPicture";
+            this.userPicture.Size = new System.Drawing.Size(125, 125);
+            this.userPicture.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.userPicture.TabIndex = 0;
+            this.userPicture.TabStop = false;
             // 
             // UserEditor
             // 
