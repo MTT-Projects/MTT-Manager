@@ -515,14 +515,35 @@ namespace MTT_Manager
 
             var UserDataRef = FireBaseControl.client.Child("users").Child(currentUser.UserId);
             await UserDataRef.DeleteAsync();
+
+            var imageRef = FireBaseControl.storageRef
+                    .Child("ProfilePics")
+                    .Child($"{currentUser.UserId}.png");
+
+            try
+            {
+                await imageRef.DeleteAsync();
+            }
+            catch
+            {
+                Console.WriteLine("No user Image");
+            }
+
             deleteMsg.Close();
+            MessageBox.Show("Cuenta eliminada con exito", "Eliminacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.None);
+            ClearUserView();
+            LoadDatabase();
         }
 
         public void RegisterNewUser()
         {
-
+            UserRegister newRegister = new UserRegister(this);
+            newRegister.Show();
         }
 
-        
+        private void nuevoUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RegisterNewUser();
+        }
     }
 }

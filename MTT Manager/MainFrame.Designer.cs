@@ -124,6 +124,7 @@
             this.nuevoUsuarioToolStripMenuItem.Name = "nuevoUsuarioToolStripMenuItem";
             this.nuevoUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.nuevoUsuarioToolStripMenuItem.Text = "Nuevo Usuario";
+            this.nuevoUsuarioToolStripMenuItem.Click += new System.EventHandler(this.nuevoUsuarioToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
@@ -502,7 +503,7 @@
             this.BT_refresh.BackgroundImage = global::MTT_Manager.Properties.Resources.refresh_icon;
             this.BT_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_refresh.Location = new System.Drawing.Point(19, 3);
+            this.BT_refresh.Location = new System.Drawing.Point(22, 3);
             this.BT_refresh.Name = "BT_refresh";
             this.BT_refresh.Size = new System.Drawing.Size(23, 23);
             this.BT_refresh.TabIndex = 3;

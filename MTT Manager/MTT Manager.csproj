@@ -289,6 +289,9 @@
     <EmbeddedResource Include="UserEditor.resx">
       <DependentUpon>UserEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="UserRegister.resx">
+      <DependentUpon>UserRegister.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

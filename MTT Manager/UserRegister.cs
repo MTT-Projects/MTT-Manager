@@ -42,7 +42,6 @@ namespace MTT_Manager
             string nickName = TB_nickname.Text;
             string email = TB_email.Text;
             string password = TB_password.Text;
-            bool isVerified = CB_verified.Checked;
 
             FirebaseAuthClient myAuth = new FirebaseAuthClient(myConfig);
 
@@ -51,14 +50,13 @@ namespace MTT_Manager
                 UserCredential newUserCredential = await myAuth.CreateUserWithEmailAndPasswordAsync(email, password, nickName);                
                 string userId = newUserCredential.User.Uid;
 
-                newUserCredential.User.Info.IsEmailVerified = isVerified;
                 User newUser = new User
                 {
                     NickName = nickName,
                     Email = email,
                     Password = password,
                     RegistrationDate = DateTime.Now,
-                    AccountActive = isVerified
+                    AccountActive = false
                 };
 
                 string newUserJson = JsonConvert.SerializeObject(newUser);
@@ -89,7 +87,7 @@ namespace MTT_Manager
             TB_nickname.Text = "";
             TB_email.Text = "";
             TB_password.Text = "";
-            CB_verified.Checked = false;
+            TB_nickname.Focus();
         }
 
         private void BT_revealPW_MouseDown(object sender, MouseEventArgs e)
@@ -104,11 +102,21 @@ namespace MTT_Manager
             BT_revealPW.BackgroundImage = Resources.eye_close_1;
         }
 
-        private async void BT_login_Click(object sender, EventArgs e)
+        private void TB_password_Click(object sender, EventArgs e)
+        {
+            TB_password.UseSystemPasswordChar = true;
+        }
+
+        private void BT_login_Click(object sender, EventArgs e)
+        {
+            Regitration_event();
+        }
+
+        public async void Regitration_event()
         {
             bool iscreate = await RegisterNewUser();
 
-            if(iscreate)
+            if (iscreate)
             {
                 MessageBox.Show("Usuario correctamente registrado.");
                 parent.LoadDatabase();
@@ -124,6 +132,34 @@ namespace MTT_Manager
         {
             parent.Enabled = true;
             parent.Focus();
+        }
+
+        private void BT_Cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void textBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+                Regitration_event();
+        }
+
+        private void emailInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyValue == 13)
+                Regitration_event();
+        }
+
+
+        private void TB_nickname_Enter(object sender, EventArgs e)
+        {
+            TB_password.UseSystemPasswordChar = true;
+        }
+
+        private void TB_password_Enter(object sender, EventArgs e)
+        {
+            TB_password.UseSystemPasswordChar = true;
         }
     }
 
