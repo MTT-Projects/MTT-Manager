@@ -45,7 +45,7 @@ namespace MTT_Manager
 
                 // Verificar si el usuario es un administrador en la base de datos
                 bool isAdmin = await CheckAdminStatus(userId);
-                string nickName = await GetNickName(userId);
+                string nickName = await FireBaseControl.GetNickName(userId);
 
                 loadMessage.Dispose();
 
@@ -97,13 +97,7 @@ namespace MTT_Manager
             return checkDataPlayer.IsAdmin;
         }
 
-        private async Task<string> GetNickName(string userId)
-        {
-            var nickNameRef = FireBaseControl.client.Child("users").Child(userId).Child("NickName");
-            var nickNameSnapshot = await nickNameRef.OnceSingleAsync<string>();
-            string nickName = nickNameSnapshot ?? string.Empty;
-            return nickName;
-        }
+        
 
         private void BT_login_Click(object sender, EventArgs e)
         {

@@ -37,6 +37,10 @@
             this.nuevoUsuarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.imprimirReporteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.herramientasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.herramientasDeDesarrolloToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.herramientasCOMPLETAMENTENecesariasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.calculadoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dataView = new System.Windows.Forms.DataGridView();
             this.mySplitContainer = new System.Windows.Forms.SplitContainer();
             this.BT_edit = new System.Windows.Forms.Button();
@@ -85,7 +89,8 @@
             this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlDark;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sesiónToolStripMenuItem,
-            this.usuariosToolStripMenuItem});
+            this.usuariosToolStripMenuItem,
+            this.herramientasToolStripMenuItem});
             this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -122,23 +127,54 @@
             // nuevoUsuarioToolStripMenuItem
             // 
             this.nuevoUsuarioToolStripMenuItem.Name = "nuevoUsuarioToolStripMenuItem";
-            this.nuevoUsuarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.nuevoUsuarioToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.nuevoUsuarioToolStripMenuItem.Text = "Nuevo Usuario";
             this.nuevoUsuarioToolStripMenuItem.Click += new System.EventHandler(this.nuevoUsuarioToolStripMenuItem_Click);
             // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.Name = "editarToolStripMenuItem";
-            this.editarToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.editarToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.editarToolStripMenuItem.Text = "Editar";
             this.editarToolStripMenuItem.Click += new System.EventHandler(this.editarToolStripMenuItem_Click);
             // 
             // imprimirReporteToolStripMenuItem
             // 
             this.imprimirReporteToolStripMenuItem.Name = "imprimirReporteToolStripMenuItem";
-            this.imprimirReporteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.imprimirReporteToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.imprimirReporteToolStripMenuItem.Text = "Imprimir reporte";
             this.imprimirReporteToolStripMenuItem.Click += new System.EventHandler(this.imprimirReporteToolStripMenuItem_Click);
+            // 
+            // herramientasToolStripMenuItem
+            // 
+            this.herramientasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.herramientasDeDesarrolloToolStripMenuItem});
+            this.herramientasToolStripMenuItem.Name = "herramientasToolStripMenuItem";
+            this.herramientasToolStripMenuItem.Size = new System.Drawing.Size(90, 20);
+            this.herramientasToolStripMenuItem.Text = "Herramientas";
+            // 
+            // herramientasDeDesarrolloToolStripMenuItem
+            // 
+            this.herramientasDeDesarrolloToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.herramientasCOMPLETAMENTENecesariasToolStripMenuItem});
+            this.herramientasDeDesarrolloToolStripMenuItem.Name = "herramientasDeDesarrolloToolStripMenuItem";
+            this.herramientasDeDesarrolloToolStripMenuItem.Size = new System.Drawing.Size(216, 22);
+            this.herramientasDeDesarrolloToolStripMenuItem.Text = "Herramientas de desarrollo";
+            // 
+            // herramientasCOMPLETAMENTENecesariasToolStripMenuItem
+            // 
+            this.herramientasCOMPLETAMENTENecesariasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.calculadoraToolStripMenuItem});
+            this.herramientasCOMPLETAMENTENecesariasToolStripMenuItem.Name = "herramientasCOMPLETAMENTENecesariasToolStripMenuItem";
+            this.herramientasCOMPLETAMENTENecesariasToolStripMenuItem.Size = new System.Drawing.Size(315, 22);
+            this.herramientasCOMPLETAMENTENecesariasToolStripMenuItem.Text = "Herramientas COMPLETAMENTE \"Necesarias\"";
+            // 
+            // calculadoraToolStripMenuItem
+            // 
+            this.calculadoraToolStripMenuItem.Name = "calculadoraToolStripMenuItem";
+            this.calculadoraToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.calculadoraToolStripMenuItem.Text = "Calculadora";
+            this.calculadoraToolStripMenuItem.Click += new System.EventHandler(this.calculadoraToolStripMenuItem_Click);
             // 
             // dataView
             // 
@@ -503,7 +539,7 @@
             this.BT_refresh.BackgroundImage = global::MTT_Manager.Properties.Resources.refresh_icon;
             this.BT_refresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.BT_refresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BT_refresh.Location = new System.Drawing.Point(22, 3);
+            this.BT_refresh.Location = new System.Drawing.Point(28, 3);
             this.BT_refresh.Name = "BT_refresh";
             this.BT_refresh.Size = new System.Drawing.Size(23, 23);
             this.BT_refresh.TabIndex = 3;
@@ -582,5 +618,9 @@
         private System.Windows.Forms.Button BT_admin;
         private System.Windows.Forms.Button BT_edit;
         public System.Windows.Forms.PictureBox userPicture;
+        private System.Windows.Forms.ToolStripMenuItem herramientasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem herramientasDeDesarrolloToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem herramientasCOMPLETAMENTENecesariasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem calculadoraToolStripMenuItem;
     }
 }

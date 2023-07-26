@@ -217,7 +217,10 @@ namespace MTT_Manager
         {
             userData.RegistrationDate = RegistrationDate.Value;
             userData.LastLogin = LastLoginDate.Value;
-            userData.LastBan= LastBanDate.Value;
+            if (LastBanDate.Value != LastBanDate.MinDate)
+                userData.LastBan = LastBanDate.Value;
+            else
+                userData.LastBan = DateTime.MinValue;
             userData.NickName = TB_NickName.Text;
             userData.Email = TB_email.Text;
             userData.IsBanned=isBanned_check.Checked;

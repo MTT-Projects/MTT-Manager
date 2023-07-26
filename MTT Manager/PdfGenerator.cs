@@ -12,11 +12,16 @@ using MTT_Manager.Properties;
 
 public static class PdfGenerator
 {
-    public static void PrintUsersData(List<User> userList)
+    static InfoBox popUp; 
+    public async static void PrintUsersData(List<User> userList, InfoBox newpopUp)
     {
+        popUp = newpopUp;
+        if (!Directory.Exists("C:\\MTTReports"))
+            Directory.CreateDirectory("C:\\MTTReports");
         // Ruta y nombre del archivo PDF que se generará
-        string pdfFileName = "D:\\UsersData.pdf";
-        string adminName = FireBaseControl.auth.User.Info.FirstName;
+        var dateFile = DateTime.Now.ToString("MM_dd_yyyy_H_mm");
+        string pdfFileName = $"C:\\MTTReports\\report_{dateFile}.pdf";
+        string adminName = await FireBaseControl.GetNickName(FireBaseControl.auth.User.Uid);
         string adminEmail = FireBaseControl.auth.User.Info.Email;
 
         // Crear el documento PDF en formato horizontal (paisaje)
@@ -82,12 +87,16 @@ public static class PdfGenerator
             table.AddCell(new PdfPCell(new Phrase(user.UserId, cellFont)));
             table.AddCell(new PdfPCell(new Phrase(user.NickName, cellFont)));
             table.AddCell(new PdfPCell(new Phrase(user.Email, cellFont)));
-            table.AddCell(new PdfPCell(new Phrase(user.RegistrationDate.ToString(), cellFont)));
-            table.AddCell(new PdfPCell(new Phrase(user.LastLogin.ToString(), cellFont)));
+            table.AddCell(new PdfPCell(new Phrase(user.RegistrationDate == DateTime.MinValue
+                        ? "No establecido"
+                        : user.RegistrationDate.ToString(), cellFont)));
+            table.AddCell(new PdfPCell(new Phrase(user.LastLogin == DateTime.MinValue
+                        ? "No establecido"
+                        : user.LastLogin.ToString(), cellFont)));
             table.AddCell(new PdfPCell(new Phrase(user.LastBan == DateTime.MinValue
                         ? "No establecido"
                         : user.LastBan.ToString(), cellFont)));
-            table.AddCell(new PdfPCell(new Phrase(user.AccountActive.ToString(), cellFont)));
+            table.AddCell(new PdfPCell(new Phrase(user.AccountActive ? "Verified" : "Not Verified" , cellFont)));
         }
 
         // Agregar la tabla al documento
@@ -113,12 +122,13 @@ public static class PdfGenerator
         float textX = PageSize.A4.Rotate().Width / 2;
         float textY = y - 10; // Ajustar la posición vertical del texto según tus necesidades
         cb.SetTextMatrix(textX, textY);
-        cb.ShowTextAligned(Element.ALIGN_CENTER, "MTT Projects", textX, textY, 0);
+        cb.ShowTextAligned(Element.ALIGN_CENTER, "MTT Projects (2023)", textX, textY, 0);
         cb.EndText();
 
         // Cerrar el documento
         doc.Close();
 
+        popUp.Close();
         // Imprimir el PDF generado
         PrintPdfFile(pdfFileName);
     }
@@ -148,31 +158,3 @@ public static class PdfGenerator
     }
 }
 
-public class PageEventHelper : PdfPageEventHelper
-{
-    // Método que se llama en cada página del PDF
-    public override void OnEndPage(PdfWriter writer, Document doc)
-    {
-        // Agregar el pie de página en cada página
-        PdfContentByte cb = writer.DirectContent;
-
-        // Agregar la imagen "MTT_Logo.png" en la esquina inferior izquierda de la página
-        iTextSharp.text.Image img = iTextSharp.text.Image.GetInstance(Resources.MTT_Logo_, System.Drawing.Imaging.ImageFormat.Png);
-        float imageWidth = 50f; // Ajusta el ancho de la imagen según tus necesidades
-        float imageHeight = img.Height * imageWidth / img.Width;
-        float x = 20; // Margen izquierdo de la imagen
-        float y = 20; // Margen inferior de la imagen
-        img.SetAbsolutePosition(x, y);
-        cb.AddImage(img);
-
-        // Agregar el texto "MTT Projects" debajo del icono
-        BaseFont bf = BaseFont.CreateFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-        cb.BeginText();
-        cb.SetFontAndSize(bf, 8); // Tamaño de la fuente para el texto
-        float textX = x + imageWidth / 2;
-        float textY = y - 10; // Ajusta el espacio entre la imagen y el texto según tus necesidades
-        cb.SetTextMatrix(textX, textY);
-        cb.ShowTextAligned(Element.ALIGN_CENTER, "MTT Projects", textX, textY, 0);
-        cb.EndText();
-    }
-}

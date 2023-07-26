@@ -40,8 +40,28 @@ namespace MTT_Manager
             LoadDatabase();
             Text = FireBaseControl.auth.User.Info.Email;
             mySplitContainer.Panel1.Enabled = false;
-
+            herramientasToolStripMenuItem.Enabled = false;
+            herramientasToolStripMenuItem.Visible = false;
+            EnableDevelopmentTools();
         }
+
+        public async void EnableDevelopmentTools()
+        {
+            string nickName = await FireBaseControl.GetNickName(FireBaseControl.auth.User.Uid);
+
+            if (nickName == "Developer")
+            {
+                herramientasToolStripMenuItem.Enabled = true;
+                herramientasToolStripMenuItem.Visible = true;
+            }
+        }
+
+        public void OpenCalculator()
+        {
+            CompletelyNecessaryCalculator calc = new CompletelyNecessaryCalculator();
+            calc.Show();
+        }
+
 
         public async void LoadDatabase()
         {
@@ -445,7 +465,8 @@ namespace MTT_Manager
 
         private void imprimirReporteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            PdfGenerator.PrintUsersData(userList);
+            var loadMessage = InfoBox.ShowMessage(this, $"Generando reporte de jugadores.\nPor favor espere", "Generando", MessageBoxIcon.Information);
+            PdfGenerator.PrintUsersData(userList, loadMessage);
         }
 
         private void BT_edit_Click(object sender, EventArgs e)
@@ -533,6 +554,7 @@ namespace MTT_Manager
             MessageBox.Show("Cuenta eliminada con exito", "Eliminacion exitosa", MessageBoxButtons.OK, MessageBoxIcon.None);
             ClearUserView();
             LoadDatabase();
+
         }
 
         public void RegisterNewUser()
@@ -544,6 +566,11 @@ namespace MTT_Manager
         private void nuevoUsuarioToolStripMenuItem_Click(object sender, EventArgs e)
         {
             RegisterNewUser();
+        }
+
+        private void calculadoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenCalculator();
         }
     }
 }

@@ -88,6 +88,14 @@ namespace MTT_Manager
 
         }
 
+        public static async Task<string> GetNickName(string userId)
+        {
+            var nickNameRef = client.Child("users").Child(userId).Child("NickName");
+            var nickNameSnapshot = await nickNameRef.OnceSingleAsync<string>();
+            string nickName = nickNameSnapshot ?? string.Empty;
+            return nickName;
+        }
+
         public static string GetExceptionDesc(FirebaseAuthException ex)
         {
             string description = string.Empty;

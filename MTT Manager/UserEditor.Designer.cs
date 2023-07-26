@@ -166,6 +166,7 @@
             // 
             // LastScore_Date
             // 
+            this.LastScore_Date.CustomFormat = "dd/MM/yyyy H:mm";
             this.LastScore_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.LastScore_Date.Location = new System.Drawing.Point(10, 192);
             this.LastScore_Date.Name = "LastScore_Date";
@@ -202,6 +203,7 @@
             // 
             // HighScore_Date
             // 
+            this.HighScore_Date.CustomFormat = "dd/MM/yyyy H:mm";
             this.HighScore_Date.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.HighScore_Date.Location = new System.Drawing.Point(10, 89);
             this.HighScore_Date.Name = "HighScore_Date";
@@ -306,6 +308,7 @@
             // 
             // RegistrationDate
             // 
+            this.RegistrationDate.CustomFormat = "dd/MM/yyyy H:mm";
             this.RegistrationDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.RegistrationDate.Location = new System.Drawing.Point(12, 267);
             this.RegistrationDate.Name = "RegistrationDate";
@@ -332,6 +335,7 @@
             // 
             // LastLoginDate
             // 
+            this.LastLoginDate.CustomFormat = "dd/MM/yyyy H:mm";
             this.LastLoginDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.LastLoginDate.Location = new System.Drawing.Point(11, 317);
             this.LastLoginDate.Name = "LastLoginDate";
@@ -349,6 +353,7 @@
             // 
             // LastBanDate
             // 
+            this.LastBanDate.CustomFormat = "dd/MM/yyyy H:mm";
             this.LastBanDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.LastBanDate.Location = new System.Drawing.Point(12, 366);
             this.LastBanDate.Name = "LastBanDate";
